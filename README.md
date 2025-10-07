@@ -17,6 +17,8 @@
 
 **prometheus.yaml file:**
 
+'''
+
 # my global config
 global:
   scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
@@ -70,7 +72,7 @@ scrape_configs:
       - target_label: __address__
         replacement: 54.221.93.1:9115  # The blackbox exporter's real hostname:port.
 
-
+'''
 
 <img width="1792" height="758" alt="Screenshot 2025-10-07 at 21 46 30" src="https://github.com/user-attachments/assets/d7992594-d9de-45ed-8025-994eeda5a47b" />
 
