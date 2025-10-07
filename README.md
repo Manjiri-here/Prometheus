@@ -14,7 +14,6 @@
 
 **prometheus.yaml file:**
 
-ubuntu@ip-172-31-20-25:~/prometheus$ cat prometheus.yml
 # my global config
 global:
   scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
@@ -44,7 +43,7 @@ scrape_configs:
 
     static_configs:
       - targets: ["localhost:9090"]
-       # The label name is added as a label `label_name=<label_value>` to any timeseries scraped from this config.
+        # The label name is added as a label `label_name=<label_value>` to any timeseries scraped from this config.
         labels:
           app: "prometheus"
 
@@ -59,7 +58,7 @@ scrape_configs:
       module: [http_2xx]  # Look for a HTTP 200 response.
     static_configs:
       - targets:
-        - http://3.90.189.219:8080/    # Target to probe with http.
+        - [http://3.90.189.219:8080/](http://3.90.189.219:8080/)    # Target to probe with http.
     relabel_configs:
       - source_labels: [__address__]
         target_label: __param_target
