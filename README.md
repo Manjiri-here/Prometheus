@@ -422,3 +422,79 @@ Where does it need to run?
 What port will Prometheus scrape?
 
 If you can answer those 6 questions, you can use ANY exporter even if you’ve never seen it before.
+
+# Question: And if I had any other app built , which is customized then which exporter we use? The language like java, python we used depending on that or depending on backend technology?
+
+What actually happens in a real custom app
+
+Example: You built a Spring Boot (Java) API
+
+You expose:
+/actuator/prometheus
+
+Prometheus scrapes:
+http://app-server:8080/actuator/prometheus
+
+You get:
+
+Request count
+Error rate
+Latency
+JVM memory
+GC pauses
+Thread count
+No exporter involved.
+
+4️⃣ When would you still use an exporter with a custom app?
+
+Only in these cases:
+
+✅ Case 1: You CANNOT modify the app
+
+Vendor software
+Legacy binary
+
+Closed-source service
+→ Then you use an exporter that scrapes stats via:
+
+HTTP
+JMX
+Unix socket
+Status endpoints
+
+✅ Case 2: You want protocol-level data, not app logic
+
+Example:
+
+App uses MySQL → you still use MySQL Exporter
+App uses Redis → you still use Redis Exporter
+But that’s for the DEPENDENCIES, not your app.
+
+5️⃣ Pushgateway — only for batch jobs (not normal apps)
+
+First reference: Prometheus Pushgateway
+
+Use it ONLY when:
+
+App runs for 10 seconds
+Exits
+Can’t be scraped
+
+Examples:
+
+Cron jobs
+Data pipelines
+One-off batch tasks
+
+If you use Pushgateway for a normal web app → that’s wrong design.
+
+✅ CORRECT MENTAL MODEL (MEMORIZE THIS)
+
+| What you are monitoring        | What you use            |
+| ------------------------------ | ----------------------- |
+| **Your own app code**          | Language client library |
+| **Databases, proxies, queues** | Exporters               |
+| **One-shot jobs**              | Pushgateway             |
+| **Server health**              | Node Exporter           |
+| **External uptime**            | Blackbox Exporter       |
+
