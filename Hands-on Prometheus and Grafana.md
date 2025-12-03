@@ -62,3 +62,43 @@ Running above steps gave error in starting sql exporter, hence I followed below 
    23  sudo systemctl daemon-reload
    24  sudo systemctl restart mysqld_exporter
    25  sudo systemctl status mysqld_exporter --no-pager
+
+
+Now we add only exporter as scrape configs in /etc/prometheus/prometheus.yml file.
+
+For eg:
+
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "nginx"
+
+    static_configs:
+
+      - targets: ["localhost:9113"]
+
+  - job_name: "node"
+    static_configs:
+      - targets: ["localhost:9100"]
+
+  - job_name: "mysql_exporter"
+    static_configs:
+      - targets: ["localhost:9104"]
+
+Once added restart prometheus: % sudo systemctl restart prometheus 
+And verify in browser.
+
+Now in Grafana UI we add data source as prometheus and Loki URLs
+
+Now we also add alert manager as alerting config to prometheus.yml file:
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - localhost:9093
+            
+ ANd restart prometheus agian: sudo systemctl restart prometheus
+
+ Next there are many steps like creating alert rule and also provision to set notification via email or slack, check that once dashboard creation is done.
