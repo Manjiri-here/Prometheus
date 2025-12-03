@@ -7,6 +7,7 @@ Node exporter- http://localhost:9100/metrics
 Nginx prometheus exporter- 9113
 Grafana - http://SERVER_IP:3000.    
 Alert manager- http://SERVER_IP:9093
+mysql exporter - 9104
 
 Now you need to set user name and password for sql:
 
