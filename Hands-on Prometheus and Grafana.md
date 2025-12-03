@@ -102,3 +102,12 @@ alerting:
  ANd restart prometheus agian: sudo systemctl restart prometheus
 
  Next there are many steps like creating alert rule and also provision to set notification via email or slack, check that once dashboard creation is done.
+
+ http://3.238.173.96:3000/?orgId=1&from=now-6h&to=now&timezone=browser
+ http://3.238.173.96:9093/#/alerts
+ http://3.238.173.96:8080/
+ http://3.238.173.96:9100/metrics
+ http://3.238.173.96:9113/metrics
+ http://3.238.173.96:9090/targets?search=
+ http://3.238.173.96:9104/metrics
+ 
